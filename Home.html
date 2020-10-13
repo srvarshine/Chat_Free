@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body {font-family: Arial;
+background-color: #99ebff;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 50px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #00ace6;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #00ace6;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 5px solid #ccc;
+  border-top: none;
+}
+.div1{
+      background-color: #0066cc;
+      width: 500px;
+      height: 350px;
+      padding:50px;
+      border: 10px solid black;
+    }
+</style>
+</head>
+<body><script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.26.12'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+
+<h2 align="center">CHAT FREE</h2>
+<p align="center"><b>Welcome to chat space</b></p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
+  <button class="tablinks" onclick="openCity(event, 'Search')">Search</button>
+  <button class="tablinks" onclick="openCity(event, 'Posts')">Posts</button>
+  <button class="tablinks" onclick="openCity(event, 'FeedBack')">FeedBack</button>
+</div>
+<div ng-app='myApp' 
+ng-controller='myController'>
+<div id="Users" class="tabcontent">
+  <h3>Users</h3>
+  <div w3-test-directive></div>
+  <br>
+  <br>
+  <table border="1" width="100%">
+    <tr>
+            <th ng-click="orderByMe('name')">Name</th>
+                <th ng-click="orderByMe('gender')">Gender</th>
+                <th ng-click="orderByMe('dob')">DOB</th>
+                <th ng-click="orderByMe('bio')">Bio</th>
+                <th ng-click="orderByMe('following')">Following</th>
+                <th>Follow</th>
+
+    </tr>
+
+    <tr ng-repeat="users in users.data | orderBy:myOrderBy">
+        <td>{{users.name}}</td>
+            <td>{{users.gender}}</td>
+                <td>{{users.dob}}</td>
+                    <td>{{users.bio}}</td>
+                    <td>{{users.following}}</td>
+                    <td>{{users.followers}}</td>
+                    <td><button>Follow</button></td>
+    </tr>
+</table>
+
+</div>
+
+<div id="Search" class="tabcontent">
+  <h3>Search</h3>
+  <div w3-test-directive1></div>
+  <br>
+  <br>
+  <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+    <input type="text" ng-model="search1" placeholder="Search.." name="search1">
+    <button type="submit"><i class="fa fa-search"></i></button>
+    <br>
+    <br>
+    <p><b>Name----Bio----Followings----Followers</b></p>
+    <ul ng-repeat="users in users.data  | filter : search1" >
+        
+        <li>{{ users.name + '----' + users.bio + '----' + users.following+ '----' +users.followers}}</li>
+    </ul>
+  </form>
+  
+</div>
+
+<div id="Posts" class="tabcontent">
+  <h3>Posts</h3>
+  <div w3-test-directive2></div>
+  
+ 
+    <center>
+        <div class="div1">
+        <h2>POST!!</h2>
+        <label for="username" class="text-info">Username:</label><br>
+        <input type="text" name="username" placeholder="username" class="form-control" required><br><br>
+        <center><textarea
+        ng-keypress="kp2=kp2-1" cols="50">
+      </textarea></center>
+       <br>({{kp2}} words only allowed)
+       <br><br>
+  <button type="button" onclick="alert('Posted!')">Submit</button>
+      </div></center>
+</div>
+</div>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+   
+</body>
+</html> 
